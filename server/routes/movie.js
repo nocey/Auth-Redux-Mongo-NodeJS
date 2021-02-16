@@ -27,6 +27,10 @@ router.get('/find/:movieID',async(req,res)=>{
     const movie = await Movie.find({_id:req.params.movieID})
     res.send(movie)
 })
+router.get('/findlast',async(req,res)=>{
+    const movies = await Movie.find().sort('date').limit(10)
+    res.send(movies)
+})
 
 
 module.exports = router;

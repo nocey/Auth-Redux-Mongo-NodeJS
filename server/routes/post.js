@@ -9,7 +9,7 @@ require('dotenv').config();
 
 const Joi = require('joi');
 const { valid } = require('joi');
-router.get('/login',async (req,res)=>{
+router.post('/login',async (req,res)=>{
     //has a error return the error
     const { error } = loginSchema(req.body);
     if (error) return res.status(400).send(error.details[0].message)
@@ -30,10 +30,10 @@ router.get('/login',async (req,res)=>{
 router.post('/register', async (req, res) => {
     //has a error return the error
     const { error } = registerSchema(req.body);
-    if (error) return res.status(400).send(error.details[0].message)
+    if (error) return res.status(203).send(error.details[0].message)
     //check a email is exist in the database
     const mailExist = await User.findOne({email:req.body.email})
-    if(mailExist) return res.status(400).send('Email already exist!')
+    if(mailExist) return res.status(203).send('Email already exist!')
     //hash password
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(req.body.password,salt);
@@ -47,7 +47,8 @@ router.post('/register', async (req, res) => {
 
     try {
         const savedUser = await post.save()
-        res.send(savedUser._id);
+        const token =jwt.sign({_id:savedUser._id},process.env.JSONSECRET)
+        res.header('auth-token',token).send(token)
     } catch (err) {
         res.status(400).send(err);
     }

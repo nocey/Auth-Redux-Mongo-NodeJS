@@ -28,5 +28,11 @@ router.get('/find/:seriesID',async(req,res)=>{
     const series = await Series.find({_id:req.params.seriesID})
     res.send(series)
 })
+router.get('/findlast',async(req,res)=>{
+    const series = await Series.find().sort('date').limit(10)
+    console.log(series)
+    res.send(series)
+})
+
 
 module.exports = router;
