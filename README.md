@@ -18,7 +18,7 @@ in the directory , start the project
 ### `npm start`
 
 Run the server with the nodemon .\
-Open postman or you can what you want the fatching api testing this [http://localhost:3000]
+Open postman or you can what you want the fatching api testing this [http://localhost:3000](http://localhost:3000)
 if server is running respond 'Server is Running'
 
 ## For Client
