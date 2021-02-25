@@ -6,6 +6,9 @@ require('dotenv').config();
 const bP = require('body-parser');
 app.use(bP.json());//bodyparser use
 
+app.get('/',(res,req)=>{
+    res.send('Server is Running')
+})
 app.use(cors())
 const series = require('./routes/series')
 app.use('/series',series)
@@ -13,9 +16,6 @@ const movie = require('./routes/movie')
 app.use('/movie',movie)
 const post = require('./routes/post')//post routes
 app.use('/a',post)
-app.use('/',(res,req)=>{
-    res.send('Server is Running')
-})
 let a =[[1,5],[6,8]];
 console.log(a[0][0])
 mongoose.connect('mongodb+srv://naci:asdasds1@naci.zjwoz.mongodb.net/naci?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true},()=>{

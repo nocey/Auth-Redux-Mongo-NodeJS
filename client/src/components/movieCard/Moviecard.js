@@ -11,16 +11,16 @@ const useStyles = makeStyles({
       minHeight: 250,
     },
   });
-const Moviecard = () => {
+const Moviecard = (props) => {
     const style = useStyles();
     return (
         <div>
             <Card className={style.root}>
                 <CardActionArea>
-                    <CardMedia title='deneme' image='https://picsum.photos/200/300' className={style.media}></CardMedia>
+                    <CardMedia image={props.data.imgurl} className={style.media}></CardMedia>
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
-                            Movie Name
+                            {props.data.title}
                         </Typography>
                     </CardContent>
                     <CardActions>
